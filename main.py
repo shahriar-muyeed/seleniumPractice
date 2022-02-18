@@ -2,7 +2,7 @@ from pages.home_page import home_page
 from pages.signup import _signup
 from pages.authentication import authentication
 from selenium import webdriver
-import time
+import random, string
 
 
 
@@ -11,33 +11,40 @@ driver = webdriver.Chrome() #initialize driver
 
 driver.get("http://automationpractice.com/index.php") #go to the URL
 
-homepage = home_page(driver)
-homepage.click_signin()
+def signup(email,customer_firstName,customer_lastname,customer_email,password,firstname,lastname,company,address1,address2,city,state,postcode,country,extra,phone,mobile_phone,alias):
 
-signupp = _signup(driver)
-signupp.enter_email("nu@gmail.com")
-signupp.click_create_account()
+    homepage = home_page(driver)
+    homepage.click_signin()
 
-authenticationn = authentication(driver)
-authenticationn.click_title()
-authenticationn.enter_customer_firstname("jhon")
-authenticationn.enter_customer_lastname("shahriar")
-authenticationn.enter_email("nu@gmail.com")
-authenticationn.enter_password("123456789")
-authenticationn.enter_firstname("customer1")
-authenticationn.enter_lastname("rahman")
-authenticationn.enter_company("BS")
-authenticationn.enter_address1("dhaka")
-authenticationn.enter_address2("mohakhali")
-authenticationn.enter_city("dhaka")
-authenticationn.enter_state("dhaka")
-authenticationn.enter_postalcode("1234")
-authenticationn.enter_country("Bangladesh")
-authenticationn.enter_extra("jhon doe")
-authenticationn.enter_phone("0123478958")
-authenticationn.enter_mobile_phone("01957013351")
-authenticationn.enter_alias("bla bla")
-authenticationn.click_create_account()
+    signupp = _signup(driver)
+    signupp.enter_email(email)
+    signupp.click_create_account()
+
+    authenticationn = authentication(driver)
+    authenticationn.click_title()
+    authenticationn.enter_customer_firstname(customer_firstName)
+    authenticationn.enter_customer_lastname(customer_lastname)
+    authenticationn.enter_email(customer_email)
+    authenticationn.enter_password(password)
+    authenticationn.enter_firstname(firstname)
+    authenticationn.enter_lastname(lastname)
+    authenticationn.enter_company(company)
+    authenticationn.enter_address1(address1)
+    authenticationn.enter_address2(address2)
+    authenticationn.enter_city(city)
+    authenticationn.enter_state(state)
+    authenticationn.enter_postalcode(postcode)
+    authenticationn.enter_country(country)
+    authenticationn.enter_extra(extra)
+    authenticationn.enter_phone(phone)
+    authenticationn.enter_mobile_phone(mobile_phone)
+    authenticationn.enter_alias(alias)
+    authenticationn.click_create_account()
+
+random_email1='user+' + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)) + '@gmail.com'
+random_email2='user+' + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)) + '@gmail.com'
+signup(random_email1,"muyeed","shahriar",random_email1,"123456789","muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
+signup(random_email2,"muyeed","shahriar",random_email2,"123456789","muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
 
 
 
