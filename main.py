@@ -2,6 +2,8 @@ from time import time
 from pages.home_page import home_page
 from pages.signup import _signup
 from pages.signin import _signin
+from pages.userHome import _userhome
+from pages.casualDressess import _casuladressess
 from pages.authentication import authentication
 from selenium import webdriver
 import random, string
@@ -54,16 +56,21 @@ signout=_signout(driver)
 signout.click_signout()
 
 
-signup(random_email2,"muyeed","shahriar",random_email2,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
-signout.click_signout()
+# signup(random_email2,"muyeed","shahriar",random_email2,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
+# signout.click_signout()
 
-# driver.get("http://automationpractice.com/index.php")
-# homepage = home_page(driver)
-# homepage.click_signin()
-# signin=_signin(driver)
-# signin.enter_email(random_email1)
-# signin.enter_password(password)
-# signin.click_signin()
+
+signin=_signin(driver)
+signin.enter_email(random_email1)
+signin.enter_password(password)
+signin.click_signin()
+
+userhome=_userhome(driver)
+userhome.click_casual_dresses()
+
+casuladressess=_casuladressess(driver)
+casuladressess.click_dress()
+casuladressess.click_continue_shopping()
 
 
 
