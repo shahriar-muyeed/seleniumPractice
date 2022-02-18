@@ -105,4 +105,5 @@ class authentication():
     
     def click_create_account(self):
         time.sleep(10)
-        self.driver.find_element_by_id(self.submit_account_id).submit()
+        self.driver.find_element_by_id(self.submit_account_id).click()
+        
