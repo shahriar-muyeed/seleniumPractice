@@ -1,18 +1,20 @@
-from time import time
+import time
+import random, string
 from pages.home_page import home_page
 from pages.signup import _signup
 from pages.signin import _signin
 from pages.userHome import _userhome
 from pages.tshirt import _tshirt
+from pages.mycart import _mycart
 from pages.casualDressess import _casuladressess
 from pages.authentication import authentication
 from selenium import webdriver
-import random, string
 from pages.signout import _signout
 
 
-#os.environ['PATH'] += r"/home/ghost/Muyeed/BS23/venv/"#get webdriver URL
+
 driver = webdriver.Chrome() #initialize driver
+driver.maximize_window()
 
 driver.get("http://automationpractice.com/index.php") #go to the URL
 
@@ -47,36 +49,48 @@ def signup(email,customer_firstName,customer_lastname,customer_email,password,fi
     authenticationn.click_create_account()
     
 
+
+def testCycle(random_email,password):
+    signin=_signin(driver)
+    signin.enter_email(random_email)
+    signin.enter_password(password)
+    signin.click_signin()
+
+    userhome=_userhome(driver)
+    userhome.click_casual_dresses()
+
+    casuladressess=_casuladressess(driver)
+    casuladressess.click_dress()
+    casuladressess.click_tshirt()
+
+    tshirt=_tshirt(driver)
+    tshirt.click_blue_filter()
+    tshirt.click_tshirt_checkout()
+
+    cart=_mycart(driver)
+    cart.click_tocheckout()
+    cart.click_tocheckout_address()
+    cart.click_tocheckout_shipping()
+    cart.click_tocheckout_payment()
+    cart.click_tocheckout_final()
+
+    signout.click_signout()
+
+
+
 random_email1='user+' + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)) + '@gmail.com'
 random_email2='user+' + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)) + '@gmail.com'
 password="123456789"
-signup(random_email1,"muyeed","shahriar",random_email1,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
-
 
 signout=_signout(driver)
+signup(random_email1,"muyeed","shahriar",random_email1,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
+signout.click_signout()
+signup(random_email2,"muyeed","shahriar",random_email2,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
 signout.click_signout()
 
-
-# signup(random_email2,"muyeed","shahriar",random_email2,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
-# signout.click_signout()
-
-
-signin=_signin(driver)
-signin.enter_email(random_email1)
-signin.enter_password(password)
-signin.click_signin()
-
-userhome=_userhome(driver)
-userhome.click_casual_dresses()
-
-casuladressess=_casuladressess(driver)
-casuladressess.click_dress()
-casuladressess.click_tshirt()
-
-tshirt=_tshirt(driver)
-tshirt.click_blue_filter()
-tshirt.click_tshirt_checkout()
+testCycle(random_email1,password)
+testCycle(random_email2,password)
 
 
-# time.sleep(3)                                         #wait for 3 seconds
-# driver.close()                                        #close driver
+time.sleep(3)                                         #wait for 3 seconds
+driver.close()                                        #close driver
