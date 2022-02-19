@@ -3,6 +3,7 @@ from pages.home_page import home_page
 from pages.signup import _signup
 from pages.signin import _signin
 from pages.userHome import _userhome
+from pages.tshirt import _tshirt
 from pages.casualDressess import _casuladressess
 from pages.authentication import authentication
 from selenium import webdriver
@@ -70,8 +71,11 @@ userhome.click_casual_dresses()
 
 casuladressess=_casuladressess(driver)
 casuladressess.click_dress()
-casuladressess.click_continue_shopping()
+casuladressess.click_tshirt()
 
+tshirt=_tshirt(driver)
+tshirt.click_blue_filter()
+tshirt.click_tshirt_checkout()
 
 
 # time.sleep(3)                                         #wait for 3 seconds
