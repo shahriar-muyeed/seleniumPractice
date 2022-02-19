@@ -18,7 +18,7 @@ Steps to run the test:
 3. type "pip install -r requirment.txt" hit ENTER (This is install all the necessary packages for running the test)
 4. download chromedriver from "https://chromedriver.storage.googleapis.com/index.html?path=98.0.4758.102/"
 5. place the chromedriver in the root directory (chromedriver for windows(v98) and linux(v98 is already added))
-6. open CMD type "python main.py" hit enter
+6. open CMD in root directory type "python main.py" hit enter
 7. Test will start.
 
 This file consists python virtual environment with selenium,unit test and POM (Page Object Model).
