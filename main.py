@@ -11,13 +11,17 @@ from pages.authentication import authentication
 from selenium import webdriver
 from pages.signout import _signout
 
+#------------------------initialize driver---------------------------------
 
-
-driver = webdriver.Chrome() #initialize driver
+driver = webdriver.Chrome() 
 driver.maximize_window()
 
-driver.get("http://automationpractice.com/index.php") #go to the URL
+#-------------------------go to the URL--------------------------------------
+driver.get("http://automationpractice.com/index.php") 
 
+
+
+#--------------------------SignUp Function----------------------------------
 def signup(email,customer_firstName,customer_lastname,customer_email,password,firstname,lastname,company,address1,address2,city,state,postcode,country,extra,phone,mobile_phone,alias):
 
     homepage = home_page(driver)
@@ -49,7 +53,7 @@ def signup(email,customer_firstName,customer_lastname,customer_email,password,fi
     authenticationn.click_create_account()
     
 
-
+#-----------------------------------testCycle Function------------------------------------
 def testCycle(random_email,password):
     signin=_signin(driver)
     signin.enter_email(random_email)
@@ -77,12 +81,15 @@ def testCycle(random_email,password):
     signout.click_signout()
 
 
-
+#--------------------------generate random user emails and password---------------------------------
 random_email1='user+' + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)) + '@gmail.com'
 random_email2='user+' + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)) + '@gmail.com'
 password="123456789"
 
+#--------------------------signOut----------------------------
 signout=_signout(driver)
+
+#--------------------------test Process---------------------------------------------------
 signup(random_email1,"muyeed","shahriar",random_email1,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
 signout.click_signout()
 signup(random_email2,"muyeed","shahriar",random_email2,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
@@ -91,6 +98,6 @@ signout.click_signout()
 testCycle(random_email1,password)
 testCycle(random_email2,password)
 
-
-time.sleep(3)                                         #wait for 3 seconds
-driver.close()                                        #close driver
+#---------------------------close driver-------------------------------------
+time.sleep(3)                                         
+driver.close()                                        
