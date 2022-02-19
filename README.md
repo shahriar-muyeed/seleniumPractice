@@ -7,7 +7,7 @@ Test Job from BS-23
 4. Go to the Casual Dressess section and add a dress into the cart.
 5. Go to the T-shirt section > Filter the list with blue color > Add a shirt from the filter list.
 6. Now checkout and select the payment process "payment by check"
-7. Sign out drom the account
+7. Sign out from the account
 
 Run the abouve cycle for another user.
 
@@ -15,7 +15,7 @@ Steps to run the test:
 
 1. install python 
 2. open CMD 
-3. type "pip install -r requirment.txt" hit ENTER (This is install all the necessary packages for running the test)
+3. type "pip install -r requirment.txt" hit ENTER (This installs all the necessary packages for running the test)
 4. download chromedriver from "https://chromedriver.storage.googleapis.com/index.html?path=98.0.4758.102/"
 5. place the chromedriver in the root directory (chromedriver for windows(v98) and linux(v98 is already added))
 6. open CMD in root directory type "python main.py" hit enter
