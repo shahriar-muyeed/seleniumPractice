@@ -1,4 +1,6 @@
 import time
+import unittest
+import warnings
 import random, string
 from pages.home_page import home_page
 from pages.signup import _signup
@@ -11,93 +13,107 @@ from pages.authentication import authentication
 from selenium import webdriver
 from pages.signout import _signout
 
+
 #------------------------initialize driver---------------------------------
-
-driver = webdriver.Chrome() 
-driver.maximize_window()
-
-#-------------------------go to the URL--------------------------------------
-driver.get("http://automationpractice.com/index.php") 
+class webtester(unittest.TestCase):
 
 
-
-#--------------------------SignUp Function----------------------------------
-def signup(email,customer_firstName,customer_lastname,customer_email,password,firstname,lastname,company,address1,address2,city,state,postcode,country,extra,phone,mobile_phone,alias):
-
-    homepage = home_page(driver)
-    homepage.click_signin()
-
-    signupp = _signup(driver)
-    signupp.enter_email(email)
-    signupp.click_create_account()
-
-    authenticationn = authentication(driver)
-    authenticationn.click_title()
-    authenticationn.enter_customer_firstname(customer_firstName)
-    authenticationn.enter_customer_lastname(customer_lastname)
-    authenticationn.enter_email(customer_email)
-    authenticationn.enter_password(password)
-    authenticationn.enter_firstname(firstname)
-    authenticationn.enter_lastname(lastname)
-    authenticationn.enter_company(company)
-    authenticationn.enter_address1(address1)
-    authenticationn.enter_address2(address2)
-    authenticationn.enter_city(city)
-    authenticationn.enter_state(state)
-    authenticationn.enter_postalcode(postcode)
-    authenticationn.enter_country(country)
-    authenticationn.enter_extra(extra)
-    authenticationn.enter_phone(phone)
-    authenticationn.enter_mobile_phone(mobile_phone)
-    authenticationn.enter_alias(alias)
-    authenticationn.click_create_account()
     
 
-#-----------------------------------testCycle Function------------------------------------
-def testCycle(random_email,password):
-    signin=_signin(driver)
-    signin.enter_email(random_email)
-    signin.enter_password(password)
-    signin.click_signin()
 
-    userhome=_userhome(driver)
-    userhome.click_casual_dresses()
+    @classmethod
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+        warnings.filterwarnings(action="ignore", message="unclosed", category=ResourceWarning) 
+        warnings.filterwarnings("ignore", category=DeprecationWarning) 
+        #self.driver.maximize_window()
+        self.driver.get("http://automationpractice.com/index.php") 
 
-    casuladressess=_casuladressess(driver)
-    casuladressess.click_dress()
-    casuladressess.click_tshirt()
+    
+    
 
-    tshirt=_tshirt(driver)
-    tshirt.click_blue_filter()
-    tshirt.click_tshirt_checkout()
+    def test_signup1(self):
+        driver=self.driver
+        signout=_signout(driver)
 
-    cart=_mycart(driver)
-    cart.click_tocheckout()
-    cart.click_tocheckout_address()
-    cart.click_tocheckout_shipping()
-    cart.click_tocheckout_payment()
-    cart.click_tocheckout_final()
+        random_email1='user+' + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)) + '@gmail.com'
+        random_email2='user+' + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)) + '@gmail.com'
+        password="123456789"
 
-    signout.click_signout()
+        def signup(driver,email,customer_firstName,customer_lastname,customer_email,password,firstname,lastname,company,address1,address2,city,state,postcode,country,extra,phone,mobile_phone,alias):
+
+            homepage = home_page(driver)
+            homepage.click_signin()
+
+            signupp = _signup(driver)
+            signupp.enter_email(email)
+            signupp.click_create_account()
+
+            authenticationn = authentication(driver)
+            authenticationn.click_title()
+            authenticationn.enter_customer_firstname(customer_firstName)
+            authenticationn.enter_customer_lastname(customer_lastname)
+            authenticationn.enter_email(customer_email)
+            authenticationn.enter_password(password)
+            authenticationn.enter_firstname(firstname)
+            authenticationn.enter_lastname(lastname)
+            authenticationn.enter_company(company)
+            authenticationn.enter_address1(address1)
+            authenticationn.enter_address2(address2)
+            authenticationn.enter_city(city)
+            authenticationn.enter_state(state)
+            authenticationn.enter_postalcode(postcode)
+            authenticationn.enter_country(country)
+            authenticationn.enter_extra(extra)
+            authenticationn.enter_phone(phone)
+            authenticationn.enter_mobile_phone(mobile_phone)
+            authenticationn.enter_alias(alias)
+            authenticationn.click_create_account()
 
 
-#--------------------------generate random user emails and password---------------------------------
-random_email1='user+' + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)) + '@gmail.com'
-random_email2='user+' + ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)) + '@gmail.com'
-password="123456789"
+        def testCycle(random_email,password):
+            signin=_signin(self.driver)
+            signin.enter_email(random_email)
+            signin.enter_password(password)
+            signin.click_signin()
 
-#--------------------------signOut----------------------------
-signout=_signout(driver)
+            userhome=_userhome(self.driver)
+            userhome.click_casual_dresses()
 
-#--------------------------test Process---------------------------------------------------
-signup(random_email1,"muyeed","shahriar",random_email1,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
-signout.click_signout()
-signup(random_email2,"muyeed","shahriar",random_email2,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
-signout.click_signout()
+            casuladressess=_casuladressess(self.driver)
+            casuladressess.click_dress()
+            casuladressess.click_tshirt()
 
-testCycle(random_email1,password)
-testCycle(random_email2,password)
+            tshirt=_tshirt(self.driver)
+            tshirt.click_blue_filter()
+            tshirt.click_tshirt_checkout()
 
-#---------------------------close driver-------------------------------------
-time.sleep(3)                                         
-driver.close()                                        
+            cart=_mycart(self.driver)
+            cart.click_tocheckout()
+            cart.click_tocheckout_address()
+            cart.click_tocheckout_shipping()
+            cart.click_tocheckout_payment()
+            cart.click_tocheckout_final()
+            signout=_signout(self.driver)
+            signout.click_signout()
+        
+        signup(driver,random_email1,"muyeed","shahriar",random_email1,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
+        signout.click_signout()
+        signup(driver,random_email2,"muyeed","shahriar",random_email2,password,"muyeed","shahriar","BS_23","mohakhali","dhaka","Dhaka","dhaka","12345","Bangladesh","bla bla","123456789","987456321","gg")
+        signout.click_signout()
+
+        testCycle(random_email1,password)
+        testCycle(random_email2,password)
+
+
+    
+    @classmethod
+    def tearDown(self):
+        time.sleep(3)                                         
+        self.driver.close() 
+
+
+
+if __name__== '__main__':
+    unittest.main()
+                            
