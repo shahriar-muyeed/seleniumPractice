@@ -16,23 +16,16 @@ from pages.signout import _signout
 
 #------------------------initialize driver---------------------------------
 class webtester(unittest.TestCase):
-
-
-    
-
-
     @classmethod
     def setUp(self):
         self.driver = webdriver.Chrome()
         warnings.filterwarnings(action="ignore", message="unclosed", category=ResourceWarning) 
         warnings.filterwarnings("ignore", category=DeprecationWarning) 
-        #self.driver.maximize_window()
+        self.driver.maximize_window()
         self.driver.get("http://automationpractice.com/index.php") 
 
-    
-    
 
-    def test_signup1(self):
+    def test_signup(self):
         driver=self.driver
         signout=_signout(driver)
 
