@@ -1,5 +1,5 @@
-# seleniumPracticeBS-23
-Test Job from BS-23
+# seleniumPractice
+Test Plan
 
 1. Go to the URl: http://automationpractice.com/index.php
 2. Create two new accounts
